@@ -20,7 +20,7 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restaurar dependências #Baixa as bibliotecas externas
-        run: dotnet restore
+        run: dotnet restore github4women/github4women.csproj
 
       - name: Compilar o projeto # Compila o código fonte em código executável 
         run: dotnet build --no-restore --configuration Release
