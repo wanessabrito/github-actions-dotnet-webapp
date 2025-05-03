@@ -1,0 +1,32 @@
+name: dotnet-build
+
+on: 
+  push:
+    branches: ["main"]
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+
+    steps:
+      - name: Checkout do código #Baixa seu código do GitHub para a máquina virtual 
+        uses: actions/checkout@v3
+
+      - name: Instalar SDK do .NET #Instala o ambiente do .NET
+        uses: actions/setup-dotnet@v3 
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restaurar dependências #Baixa as bibliotecas externas
+        run: dotnet restore
+
+      - name: Compilar o projeto # Compila o código fonte em código executável 
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Executar testes 
+        run: dotnet test --no-build --verbosity normal
+
+      - name: Mensagem de finalização com log
+        run: echo "Workflow executado com sucesso em $(date)" 
