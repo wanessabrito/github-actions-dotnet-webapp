@@ -23,7 +23,7 @@ jobs:
         run: dotnet restore github4women/github4women.csproj
 
       - name: Compilar o projeto # Compila o código fonte em código executável 
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build github4women/github4women.csproj --no-restore 
 
       - name: Executar testes 
         run: dotnet test --no-build --verbosity normal
